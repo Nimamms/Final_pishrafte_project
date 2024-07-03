@@ -29,13 +29,15 @@ SOURCES += main.cpp\
     profile_user.cpp \
     user.cpp \
     tasks.cpp \
-    linklist.cpp
+    linklist.cpp \
+    node_linklist.cpp
 
 HEADERS  += mainwindow.h \
     profile_user.h \
     user.h \
     tasks.h \
-    linklist.h
+    linklist.h \
+    node_linklist.h
 
 FORMS    += mainwindow.ui \
     profile_user.ui

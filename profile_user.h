@@ -2,6 +2,8 @@
 #define PROFILE_USER_H
 
 #include <QDialog>
+#include <QTreeWidgetItem>
+#include <QDebug>
 
 namespace Ui {
 class profile_User;
@@ -17,6 +19,8 @@ public:
 
 private:
     Ui::profile_User *ui;
+
+    void show_info_in_tree() ;
 };
 
 #endif // PROFILE_USER_H
