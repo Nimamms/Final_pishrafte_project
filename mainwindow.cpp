@@ -63,6 +63,7 @@ void MainWindow::on_dont_have_account_stateChanged(int arg1)
 
 void MainWindow::on_PB_login_clicked()
 {
+
     //check line edits
     if (ui->LE_username->text().isEmpty() || ui->LE_password->text().isEmpty())
     {
@@ -103,8 +104,9 @@ void MainWindow::on_PB_login_clicked()
 
     if (flag == false ) //username and password were correct
     {
+        QString key_username = ui->LE_username->text() ;
         QMessageBox::information(this , "Welcome" , "you sign in successfully") ;
-        profile_User * profile = new profile_User ;
+        profile_User * profile = new profile_User(key_username) ;
         this->hide();
         profile->show();
 

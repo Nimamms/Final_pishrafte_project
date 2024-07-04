@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QTreeWidgetItem>
 #include <QDebug>
+#include <QPushButton>
 
 namespace Ui {
 class profile_User;
@@ -14,11 +15,15 @@ class profile_User : public QDialog
     Q_OBJECT
 
 public:
-    explicit profile_User(QWidget *parent = 0);
+    explicit profile_User(const QString & key_username ,QWidget *parent = 0);
     ~profile_User();
+
+private slots:
+    void on_PB_add_new_button_clicked();
 
 private:
     Ui::profile_User *ui;
+    QString Key_Username ;
 
     void show_info_in_tree() ;
 };

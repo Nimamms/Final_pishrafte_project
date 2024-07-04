@@ -22,10 +22,10 @@ background-image : url(:/images/first back_ground.png)
   <widget class="QTreeWidget" name="Tree_show">
    <property name="geometry">
     <rect>
-     <x>9</x>
-     <y>9</y>
-     <width>331</width>
-     <height>511</height>
+     <x>100</x>
+     <y>50</y>
+     <width>241</width>
+     <height>531</height>
     </rect>
    </property>
    <column>
@@ -34,56 +34,122 @@ background-image : url(:/images/first back_ground.png)
     </property>
    </column>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QPushButton" name="PB_add_new_button">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>530</y>
-     <width>331</width>
-     <height>41</height>
+     <y>90</y>
+     <width>81</width>
+     <height>31</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="buttons">
-    <item>
-     <widget class="QPushButton" name="PB_add_new_button">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>ADD New List</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="PB_star_tasks">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Stared Tasks</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="PB_show_coworkers">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>show coworkers</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 10pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #F8F9D7; 
+                                     border: 2px solid rgb(60, 60, 60);
+                                     border-radius: 11px;</string>
+   </property>
+   <property name="text">
+    <string>Add New List</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PB_star_tasks">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>130</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 10pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #F8F9D7; 
+                                     border: 2px solid rgb(60, 60, 60);
+                                     border-radius: 11px;</string>
+   </property>
+   <property name="text">
+    <string>Stared Tasks</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PB_show_coworkers">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>170</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 8pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #F8F9D7; 
+                                     border: 2px solid rgb(60, 60, 60);
+                                     border-radius: 11px;</string>
+   </property>
+   <property name="text">
+    <string>show coworkers</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PB_show_profile_info">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 11pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #F8F9D7; 
+                                     border: 2px solid rgb(60, 60, 60);
+                                     border-radius: 11px;</string>
+   </property>
+   <property name="text">
+    <string>Profile</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Welcome_label">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>10</y>
+     <width>161</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>
