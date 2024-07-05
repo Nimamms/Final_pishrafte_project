@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>add_tasks_to_new_list</class>
+ <widget class="QDialog" name="add_tasks_to_new_list">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>350</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#add_tasks_to_new_list{
+	background-image : url(:/images/first back_ground.png);
+}</string>
+  </property>
+  <widget class="QLabel" name="LA_Title_page">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>60</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color :rgb(255, 255, 255) ;
+font: 75 16pt &quot;MRT_Yalda&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Add Tasks</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PB_add_task">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>560</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 11pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #F8F9D7; 
+                                     border: 1px solid rgb(60, 60, 60);
+                                     border-radius: 5px;</string>
+   </property>
+   <property name="text">
+    <string>Add task</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="PB_finish">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>560</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 11pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #F8F9D7; 
+                                     border: 1px solid rgb(60, 60, 60);
+                                     border-radius: 5px;</string>
+   </property>
+   <property name="text">
+    <string>Finish</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="LE_name">
+   <property name="geometry">
+    <rect>
+     <x>22</x>
+     <y>130</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 10pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #FFFFFF; 
+                                     border: 3px solid rgb(60, 60, 60);
+                                     border-radius: 14px;</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="LE_Time">
+   <property name="geometry">
+    <rect>
+     <x>22</x>
+     <y>190</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 10pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #FFFFFF; 
+                                     border: 3px solid rgb(60, 60, 60);
+                                     border-radius: 14px;</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="LE_functor">
+   <property name="geometry">
+    <rect>
+     <x>22</x>
+     <y>250</y>
+     <width>211</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 10pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #FFFFFF; 
+                                     border: 3px solid rgb(60, 60, 60);
+                                     border-radius: 14px;</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="LE_description">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>310</y>
+     <width>251</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 10pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #FFFFFF; 
+                                     border: 3px solid rgb(60, 60, 60);
+                                     border-radius: 14px;</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LA_name">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>110</y>
+     <width>61</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color :rgb(255, 255, 255) ;
+font: 75 11pt &quot;MRT_Yalda&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Name :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LA_time">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>170</y>
+     <width>161</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color :rgb(255, 255, 255) ;
+font: 75 10pt &quot;MRT_Yalda&quot;;</string>
+   </property>
+   <property name="text">
+    <string>time : ( YYYY/MM/DD )</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LA_functors">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>230</y>
+     <width>71</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color :rgb(255, 255, 255) ;
+font: 75 11pt &quot;MRT_Yalda&quot;;</string>
+   </property>
+   <property name="text">
+    <string>functor :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LA_description">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>290</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color :rgb(255, 255, 255) ;
+font: 75 11pt &quot;MRT_Yalda&quot;;</string>
+   </property>
+   <property name="text">
+    <string>description :</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="LA_accepted_task">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>520</y>
+     <width>211</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color :rgb(0, 170, 0) ;
+font: 75 10pt &quot;MRT_Yalda&quot;;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Warning_label">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>420</y>
+     <width>341</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color :rgb(255, 0, 0);
+font: 75 10pt &quot;MRT_Yalda&quot;;
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

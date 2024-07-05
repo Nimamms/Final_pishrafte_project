@@ -31,7 +31,8 @@ SOURCES += main.cpp\
     tasks.cpp \
     linklist.cpp \
     node_linklist.cpp \
-    add_new_list_name.cpp
+    add_new_list_name.cpp \
+    add_tasks_to_new_list.cpp
 
 HEADERS  += mainwindow.h \
     profile_user.h \
@@ -39,11 +40,13 @@ HEADERS  += mainwindow.h \
     tasks.h \
     linklist.h \
     node_linklist.h \
-    add_new_list_name.h
+    add_new_list_name.h \
+    add_tasks_to_new_list.h
 
 FORMS    += mainwindow.ui \
     profile_user.ui \
-    add_new_list_name.ui
+    add_new_list_name.ui \
+    add_tasks_to_new_list.ui
 
 RESOURCES += \
     images.qrc
