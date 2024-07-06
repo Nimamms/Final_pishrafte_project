@@ -58,6 +58,7 @@ void add_tasks_to_new_list::on_PB_add_task_clicked()
             ui->LE_Time->clear();
             ui->LE_functor->clear();
             ui->LE_description->clear();
+            ui->Warning_label->setText("");
             return ;
 
         }

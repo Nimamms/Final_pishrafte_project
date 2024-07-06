@@ -206,6 +206,46 @@ color: rgb(60, 60, 60);
     <string>Save</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="PB_back">
+   <property name="geometry">
+    <rect>
+     <x>109</x>
+     <y>530</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 10pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #F8F9D7; 
+                                     border: 2px solid rgb(60, 60, 60);
+                                     border-radius: 11px;</string>
+   </property>
+   <property name="text">
+    <string>Back</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>290</y>
+     <width>80</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 8pt &quot;MRT_Thameen DemiBold&quot;;
+color: rgb(60, 60, 60); 
+                                     background-color: #F8F9D7; 
+                                     border: 2px solid rgb(60, 60, 60);
+                                     border-radius: 11px;</string>
+   </property>
+   <property name="text">
+    <string>PDF export</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

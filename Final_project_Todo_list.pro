@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT += sql
+QT += printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -32,7 +33,8 @@ SOURCES += main.cpp\
     linklist.cpp \
     node_linklist.cpp \
     add_new_list_name.cpp \
-    add_tasks_to_new_list.cpp
+    add_tasks_to_new_list.cpp \
+    dialog.cpp
 
 HEADERS  += mainwindow.h \
     profile_user.h \
@@ -41,12 +43,14 @@ HEADERS  += mainwindow.h \
     linklist.h \
     node_linklist.h \
     add_new_list_name.h \
-    add_tasks_to_new_list.h
+    add_tasks_to_new_list.h \
+    dialog.h
 
 FORMS    += mainwindow.ui \
     profile_user.ui \
     add_new_list_name.ui \
-    add_tasks_to_new_list.ui
+    add_tasks_to_new_list.ui \
+    dialog.ui
 
 RESOURCES += \
     images.qrc

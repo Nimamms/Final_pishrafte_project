@@ -36,10 +36,73 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_PB_sign_up_clicked()
-{
-//    QSqlQuery query ;
-//    query.prepare("INSERT INTO Users(Name , Username , Password)"
-//                  "VALUES(:name , :username , :password)") ;
+{                                                                                //check if it is doublicated username
+
+    if (ui->LE_signup_name->text()=="")
+    {
+        ui->Warning_label->setText("Name fill require");
+        return ;
+    }
+    if(ui->LE_signup_username->text()=="")
+    {
+        ui->Warning_label->setText("choose a username");
+        return ;
+    }
+    if (ui->LE_signup_password->text()=="")
+    {
+        ui->Warning_label->setText("choose a password");
+        return ;
+    }
+
+
+    QSqlDatabase db = QSqlDatabase ::addDatabase("QSQLITE") ;
+    db.setDatabaseName("Todolist_Database.sqlite");
+    db.open();
+    if (db.isOpen())
+    {
+        QSqlQuery query ;
+        QString User_search = ui->LE_signup_username->text() ;
+        query.prepare("SELECT Username FROM Users WHERE Username = ?") ;
+        query.bindValue(0,User_search);
+        if(query.exec())
+        {
+            if(query.next())
+            {
+                QMessageBox::warning(this, "Error", "Username has choosen before ") ;
+            }
+            else
+            {
+                QSqlDatabase db = QSqlDatabase ::addDatabase("QSQLITE") ;
+                db.setDatabaseName("Todolist_Database.sqlite");
+                db.open();
+                if (db.isOpen())
+                {
+                    QSqlQuery query ;
+                    query.prepare("INSERT INTO Users (Name,Username,Password)"
+                                  "VALUES(:name,:username,:password)") ;
+                    query.bindValue(":name" , ui->LE_signup_name->text());
+                    query.bindValue(":username" , ui->LE_signup_username->text());
+                    query.bindValue(":password" , ui->LE_signup_password->text());
+
+                    query.exec() ;
+                    db.close();
+                    QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection) ;
+                    QMessageBox::information(this , "Done" , "you signup successfully ");
+
+                    return ;
+
+                }
+                else
+                {
+                    QMessageBox::warning(this,"Not connected" , "Database is not connected " );
+                }
+            }
+        }
+        else
+        {
+              QMessageBox::warning(this, "Error", "Failed to execute the search query: ") ;
+        }
+    }
 }
 
 void MainWindow::on_dont_have_account_stateChanged(int arg1)

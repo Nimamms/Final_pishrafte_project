@@ -3,6 +3,9 @@
 #include "add_new_list_name.h"
 #include "QMessageBox"
 #include <QPushButton>
+#include <QDateTime>
+#include "dialog.h"
+#include "mainwindow.h"
 
 profile_User::profile_User(const QString & key_username ,QWidget *parent) :
     QDialog(parent)
@@ -12,6 +15,7 @@ profile_User::profile_User(const QString & key_username ,QWidget *parent) :
     ui->setupUi(this);
     ui->Welcome_label->setText( profile_User ::Key_Username ) ;
     show_info_in_tree();
+    check_the_date();
 }
 
 profile_User::~profile_User()
@@ -108,6 +112,33 @@ void profile_User::show_info_in_tree()
         QMessageBox::warning(this,"Not connected" , "Database is not connected ") ;
     db.close();
     QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection) ;
+
+}
+
+void profile_User::check_the_date()
+{
+    QSqlDatabase db = QSqlDatabase ::addDatabase("QSQLITE") ;
+    db.setDatabaseName("Todolist_Database.sqlite");
+    db.open();
+    if (db.isOpen())
+    {
+        QSqlQuery query ;
+        query.prepare("SELECT * FROM Tasks WHERE user_username = :user_username") ;
+        query.bindValue(":user_username" , Key_Username);
+        query.exec() ;
+        while (query.next())
+        {
+            QString time_tasks = query.value(6).toString();
+            QDate date = QDate::fromString(time_tasks , "yyyy-MM-dd") ;
+            QString task_name = query.value(3).toString();
+
+            if (QDate::currentDate() == date)
+            {
+                QMessageBox::information(this , "its Today" ,  task_name ) ;
+            }
+
+        }
+    }
 
 }
 
@@ -211,4 +242,73 @@ void profile_User::on_pushButton_clicked()
 {
     ui->Tree_show->clear();
     show_info_in_tree();
+}
+
+void profile_User::on_PB_show_coworkers_clicked()
+{
+    ui->Tree_show->clear();
+
+    QSqlDatabase db = QSqlDatabase ::addDatabase("QSQLITE") ;
+    db.setDatabaseName("Todolist_Database.sqlite");
+    db.open();
+    if (db.isOpen())
+    {
+        QSqlQuery query ;
+        query.prepare("SELECT person_accept FROM Tasks WHERE User_Username = :user_username") ;
+        query.bindValue(":user_username" , Key_Username);
+        query.exec() ;
+        while(query.next())
+        {
+            QString person_accept = query.value(0).toString() ;
+            QTreeWidgetItem * root = new QTreeWidgetItem(ui->Tree_show) ;
+            root->setText(0,person_accept);
+            root->setIcon(0 , QIcon( ":/images/folder.png"));
+            ui->Tree_show->addTopLevelItem(root);
+
+            QSqlQuery query2 ;
+            query2.prepare("SELECT Name FROM Tasks WHERE user_username = :user_username AND person_accept = :person_accept") ;
+            query2.bindValue(":user_username", Key_Username);
+            query2.bindValue(":person_accept" ,person_accept );
+            query2.exec() ;
+            while (query2.next())                                                                      //Tasks name(Title)
+            {
+                QString Name_task = query2.value(0).toString() ;
+                QTreeWidgetItem * child = new QTreeWidgetItem();
+                child->setText(0 , Name_task );
+                child->setIcon(0 , QIcon( ":/images/Circle_34541.png"));
+                child->setCheckState(0,Qt::Unchecked);
+                root->addChild(child);
+
+
+
+
+
+            }
+        }
+
+
+    }
+    else
+        QMessageBox::warning(this,"Not connected" , "Database is not connected ") ;
+    db.close();
+    QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection) ;
+
+}
+
+void profile_User::on_PB_back_clicked()
+{
+    MainWindow * login_page = new MainWindow() ;
+    this->hide();
+    login_page->show();
+}
+
+void profile_User::on_pushButton_2_clicked()
+{
+}
+
+void profile_User::on_pushButton_3_clicked()
+{
+    Dialog * print_PDF = new Dialog(Key_Username) ;
+    this->hide();
+    print_PDF->show();
 }

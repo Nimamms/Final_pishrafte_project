@@ -177,6 +177,22 @@ font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="Warning_label">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>510</y>
+      <width>201</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color :rgb(255, 0, 0)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">

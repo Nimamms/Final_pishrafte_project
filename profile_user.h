@@ -25,11 +25,23 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_PB_show_coworkers_clicked();
+
+    void on_PB_back_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::profile_User *ui;
     QString Key_Username ;
 
     void show_info_in_tree() ;
+
+    void check_the_date() ;
+
+    void handleCheckboxStateChanged(QTreeWidgetItem* item, int column) ;
 };
 
 #endif // PROFILE_USER_H
