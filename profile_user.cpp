@@ -1,6 +1,8 @@
 #include "profile_user.h"
 #include "ui_profile_user.h"
 #include "add_new_list_name.h"
+#include "QMessageBox"
+#include <QPushButton>
 
 profile_User::profile_User(const QString & key_username ,QWidget *parent) :
     QDialog(parent)
@@ -19,29 +21,93 @@ profile_User::~profile_User()
 
 void profile_User::show_info_in_tree()
 {
-//    ui->Tree_show->setHeaderItem(2);
-//    QStringList labels ;
-//    labels<<"This Weak" << "This month" ;
-//    ui->Tree_show->setHeaderLabels(labels);
+    ui->Tree_show->setColumnCount(1);
+    QStringList labels ;
+    labels<<"to do list " ;
+    ui->Tree_show->setHeaderLabels(labels);
 
                                                                                             //Assumption Titles ( This week , This month )
-    QTreeWidgetItem * root = new QTreeWidgetItem(ui->Tree_show) ;
-    root->setText(0,"This Week");
-    ui->Tree_show->addTopLevelItem(root);
-    QTreeWidgetItem * root2 = new QTreeWidgetItem(ui->Tree_show) ;
-    root2->setText(0,"This month");
-    ui->Tree_show->addTopLevelItem(root2);
-
-    QTreeWidgetItem * root_tasks = new QTreeWidgetItem() ;
-    root_tasks->setText(0 , "name task");
-    root_tasks->setCheckState(0,Qt::Unchecked);
-    root->addChild(root_tasks);
-    QTreeWidgetItem * root_tasks2 = new QTreeWidgetItem() ;
-    root_tasks2->setText(0 , "name task2");
-    root_tasks2->setCheckState(0,Qt::Unchecked);
-    root->addChild(root_tasks2);
 
 
+    QSqlDatabase db = QSqlDatabase ::addDatabase("QSQLITE") ;
+    db.setDatabaseName("Todolist_Database.sqlite");
+    db.open();
+    if (db.isOpen())
+    {
+        QSqlQuery query ;
+        query.prepare("SELECT List_name FROM custom_Lists WHERE user_username = :user_username") ;
+        query.bindValue(":user_username" , Key_Username);
+        query.exec() ;
+        while(query.next())
+        {
+            QString List_name = query.value(0).toString() ;
+            QTreeWidgetItem * root = new QTreeWidgetItem(ui->Tree_show) ;
+            root->setText(0,List_name);
+            root->setIcon(0 , QIcon( ":/images/folder.png"));
+            ui->Tree_show->addTopLevelItem(root);
+
+            QSqlQuery query2 ;
+            query2.prepare("SELECT Name FROM Tasks WHERE user_username = :user_username AND List_name = :list_name") ;
+            query2.bindValue(":user_username", Key_Username);
+            query2.bindValue(":list_name" , List_name);
+            query2.exec() ;
+            while (query2.next())                                                                      //Tasks name(Title)
+            {
+                QString Name_task = query2.value(0).toString() ;
+                QTreeWidgetItem * child = new QTreeWidgetItem();
+                child->setText(0 , Name_task );
+                child->setIcon(0 , QIcon( ":/images/Circle_34541.png"));
+                child->setCheckState(0,Qt::Unchecked);
+                QPushButton * PB_edit =  new QPushButton("edit") ;
+                ui->Tree_show->setItemWidget(child , 1 ,PB_edit );
+                root->addChild(child);
+
+                QSqlQuery query3 ;
+                query3.prepare("SELECT * FROM Tasks WHERE user_username = :user_username AND List_name = :list_name AND Name = :name_task ") ;
+                query3.bindValue(":user_username", Key_Username);
+                query3.bindValue(":list_name" , List_name);
+                query3.bindValue(":name_task" , Name_task);
+                query3.exec() ;
+                while (query3.next())
+                {
+                    QString is_stared = query3.value(3).toString() ;
+                    QTreeWidgetItem * tasks_is_stared = new QTreeWidgetItem();
+                    tasks_is_stared->setText(0," make it stared ?");
+                    if (is_stared=="0")
+                        tasks_is_stared->setCheckState(0,Qt::Unchecked);
+                    else
+                        tasks_is_stared->setCheckState(0,Qt::Checked);
+                    child->addChild(tasks_is_stared);
+
+                    QString Date = query3.value(5).toString() ;
+                    QTreeWidgetItem * tasks_date = new QTreeWidgetItem();
+                    tasks_date->setText(0,Date);
+                    child->addChild(tasks_date);
+
+                    QString EXplenation = query3.value(6).toString() ;
+                    QTreeWidgetItem * Task_EXplenation = new QTreeWidgetItem();
+                    Task_EXplenation->setText(0,EXplenation);
+                    child->addChild(Task_EXplenation);
+
+
+                    QString person_accepted = query3.value(7).toString() ;
+                    QTreeWidgetItem * Task_person = new QTreeWidgetItem();
+                    Task_person->setText(0,person_accepted);
+                    child->addChild(Task_person);
+
+
+                }
+
+
+            }
+        }
+
+
+    }
+    else
+        QMessageBox::warning(this,"Not connected" , "Database is not connected ") ;
+    db.close();
+    QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection) ;
 
 }
 
@@ -51,4 +117,98 @@ void profile_User::on_PB_add_new_button_clicked()
     add_new_list_name * make_new_list = new add_new_list_name(key_username) ;
     this->hide();
     make_new_list->show();
+}
+
+void profile_User::on_PB_star_tasks_clicked()
+{
+    ui->Tree_show->clear();
+
+
+    QSqlDatabase db = QSqlDatabase ::addDatabase("QSQLITE") ;
+    db.setDatabaseName("Todolist_Database.sqlite");
+    db.open();
+    if (db.isOpen())
+    {
+        QSqlQuery query ;
+        query.prepare("SELECT List_name FROM custom_Lists WHERE user_username = :user_username" ) ;
+        query.bindValue(":user_username" , Key_Username);
+        query.exec() ;
+        while(query.next())
+        {
+            QString List_name = query.value(0).toString() ;
+            QTreeWidgetItem * root = new QTreeWidgetItem(ui->Tree_show) ;
+            root->setText(0,List_name);
+            root->setIcon(0 , QIcon( ":/images/folder.png"));
+            ui->Tree_show->addTopLevelItem(root);
+
+            QSqlQuery query2 ;
+            query2.prepare("SELECT Name FROM Tasks WHERE user_username = :user_username AND List_name = :list_name AND is_stared ==:is_stared") ;
+            query2.bindValue(":user_username", Key_Username);
+            query2.bindValue(":list_name" , List_name);
+            query2.bindValue(":is_stared" , 1);
+            query2.exec() ;
+            while (query2.next())                                                                      //Tasks name(Title)
+            {
+                QString Name_task = query2.value(0).toString() ;
+                QTreeWidgetItem * child = new QTreeWidgetItem();
+                child->setText(0 , Name_task );
+                child->setIcon(0 , QIcon( ":/images/Circle_34541.png"));
+                child->setCheckState(0,Qt::Unchecked);
+                QPushButton * PB_edit =  new QPushButton("edit") ;
+                ui->Tree_show->setItemWidget(child , 1 ,PB_edit );
+                root->addChild(child);
+
+                QSqlQuery query3 ;
+                query3.prepare("SELECT * FROM Tasks WHERE user_username = :user_username AND List_name = :list_name AND Name = :name_task  AND is_stared ==:is_stared ") ;
+                query3.bindValue(":user_username", Key_Username);
+                query3.bindValue(":list_name" , List_name);
+                query3.bindValue(":name_task" , Name_task);
+                query3.bindValue(":is_stared" , 1);
+                query3.exec() ;
+                while (query3.next())
+                {
+                    QString is_stared = query3.value(3).toString() ;
+                    QTreeWidgetItem * tasks_is_stared = new QTreeWidgetItem();
+                    tasks_is_stared->setText(0," make it stared ?");
+                    if (is_stared=="0")
+                        tasks_is_stared->setCheckState(0,Qt::Unchecked);
+                    else
+                        tasks_is_stared->setCheckState(0,Qt::Checked);
+                    child->addChild(tasks_is_stared);
+
+                    QString Date = query3.value(5).toString() ;
+                    QTreeWidgetItem * tasks_date = new QTreeWidgetItem();
+                    tasks_date->setText(0,Date);
+                    child->addChild(tasks_date);
+
+                    QString EXplenation = query3.value(6).toString() ;
+                    QTreeWidgetItem * Task_EXplenation = new QTreeWidgetItem();
+                    Task_EXplenation->setText(0,EXplenation);
+                    child->addChild(Task_EXplenation);
+
+
+                    QString person_accepted = query3.value(7).toString() ;
+                    QTreeWidgetItem * Task_person = new QTreeWidgetItem();
+                    Task_person->setText(0,person_accepted);
+                    child->addChild(Task_person);
+
+
+                }
+
+
+            }
+        }
+
+
+    }
+    else
+        QMessageBox::warning(this,"Not connected" , "Database is not connected ") ;
+    db.close();
+    QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection) ;
+}
+
+void profile_User::on_pushButton_clicked()
+{
+    ui->Tree_show->clear();
+    show_info_in_tree();
 }

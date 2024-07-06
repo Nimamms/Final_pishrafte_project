@@ -50,3 +50,6 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     images.qrc
+
+DISTFILES += \
+    images/folder.png

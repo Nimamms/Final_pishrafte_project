@@ -54,6 +54,10 @@ void add_tasks_to_new_list::on_PB_add_task_clicked()
             db.close();
             QSqlDatabase::removeDatabase(QSqlDatabase::defaultConnection) ;
             QMessageBox::information(this , "Done" , "your Task added successfully ");
+            ui->LE_name->clear();
+            ui->LE_Time->clear();
+            ui->LE_functor->clear();
+            ui->LE_description->clear();
             return ;
 
         }

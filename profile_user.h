@@ -21,6 +21,10 @@ public:
 private slots:
     void on_PB_add_new_button_clicked();
 
+    void on_PB_star_tasks_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::profile_User *ui;
     QString Key_Username ;
