@@ -5,6 +5,8 @@
 #include <QtSql/QSqlQuery>
 #include <QTextDocument>
 #include <QPrinter>
+#include <QFileDialog>
+#include <QtPrintSupport/QPrinter>
 
 Dialog::Dialog(const QString & key_username ,QWidget *parent) :
     QDialog(parent),
@@ -33,28 +35,30 @@ void Dialog::on_PB_continue_clicked()
         query.bindValue(":listname" , ui->LE_namelist->text());
         query.exec() ;
 
+        QString filename = QFileDialog::getSaveFileName((QWidget *)0, "Export PDF" , QString(), "*.pdf");
+        if (QFileInfo(filename).suffix().isEmpty()){ filename.append(".pdf") ;}
 
+        QPrinter printer( QPrinter::PrinterResolution) ;
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setPaperSize(QPrinter::A4);
+        printer.setOutputFileName(filename);
         QTextDocument document;
 
         while(query.next())
         {
-            QString taskName = query.value(3).toString() ;
+            QString taskName = query.value(2).toString() ;
             QString taskDate = query.value(5).toString();
             QString taskExplanation = query.value(6).toString();
             QString taskPerson = query.value(7).toString();
 
-//            document.appendHtml("<p>Column 1: " + taskName + "</p>");
-//            document.appendHtml("<p>Column 2: " + taskDate + "</p>");
-//            document.appendHtml("<p>Column 3: " + taskExplanation + "</p>");
-//            document.appendHtml("<p>Column 4: " + taskPerson + "</p>");
+            document.setHtml("<p>Column 1: " + ui->LE_namelist->text() + "   "+ Key_Username+ "   "  + taskName +  " " + taskDate +" "+ taskExplanation + "  " +taskPerson +"</p>");
+            document.print(&printer);
 
-//            document.appendHtml("<hr>");
+
+
         }
-        QPrinter printer(QPrinter::PrinterResolution);
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setOutputFileName("output.pdf");
 
-        document.print(&printer);
+
         QMessageBox::information(this, "PDF Export", "List information exported to PDF successfully!");
     }
 

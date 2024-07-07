@@ -16,6 +16,7 @@ public :
     void popBack() ;
     node_linklist<T> * operator[] (int index) ;
     const node_linklist<T> * operator[] (int index) const ;
+//    const Linklist<T> & Linklist<T>::operator<<( T data ) const ;
     ~ Linklist () ;
 private :
     node_linklist<T> * m_headNode ;
@@ -70,15 +71,11 @@ node_linklist<T> * Linklist<T>::operator[] (int index) {
     }
 }
 
-template <typename T>
-const node_linklist<T> * Linklist<T>::operator[] (int index) const {
-    if(index >= m_size ||  m_size == 0 || index < 0) return nullptr ;
-    else {
-        node_linklist<T> * node = m_headNode ;
-        while (node->getIndex() != index) node = node->getNextNode() ;
-        return node ;
-    }
-}
+//template <typename T>
+//const Linklist<T> & Linklist<T>::operator<<( T data , Linklist<T> a ) const {
+//    pushBack(data);
+//    return *this;
+//}
 
 template <typename T>
 Linklist<T>::~Linklist() {

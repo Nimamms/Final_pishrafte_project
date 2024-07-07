@@ -186,7 +186,7 @@ color: rgb(60, 60, 60);
     <string>All tasks</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="PB_save">
    <property name="geometry">
     <rect>
      <x>300</x>

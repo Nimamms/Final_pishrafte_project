@@ -1,4 +1,4 @@
-#include "profile_user.h"
+ #include "profile_user.h"
 #include "ui_profile_user.h"
 #include "add_new_list_name.h"
 #include "QMessageBox"
@@ -302,13 +302,21 @@ void profile_User::on_PB_back_clicked()
     login_page->show();
 }
 
-void profile_User::on_pushButton_2_clicked()
-{
-}
+
 
 void profile_User::on_pushButton_3_clicked()
 {
     Dialog * print_PDF = new Dialog(Key_Username) ;
     this->hide();
     print_PDF->show();
+}
+
+void profile_User::on_PB_save_clicked()
+{
+
+}
+
+void profile_User::on_Tree_show_clicked(const QModelIndex &index)
+{
+
 }

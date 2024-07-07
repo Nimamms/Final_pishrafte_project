@@ -29,9 +29,11 @@ private slots:
 
     void on_PB_back_clicked();
 
-    void on_pushButton_2_clicked();
-
     void on_pushButton_3_clicked();
+
+    void on_PB_save_clicked();
+
+    void on_Tree_show_clicked(const QModelIndex &index);
 
 private:
     Ui::profile_User *ui;
